@@ -1,9 +1,9 @@
 package wamessage
 
 import (
-	"boilerplate/config"
-	"boilerplate/helper/wahttp"
-	"boilerplate/model"
+	"iteung/config"
+	"iteung/helper/wahttp"
+	"iteung/model"
 )
 
 func SendButtonMessage(btnmsg model.NotifButton) (response interface{}) {

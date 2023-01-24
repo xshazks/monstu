@@ -1,7 +1,7 @@
 package url
 
 import (
-	"boilerplate/controller"
+	"iteung/controller"
 
 	"github.com/gin-gonic/gin"
 )

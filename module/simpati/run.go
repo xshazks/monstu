@@ -3,8 +3,8 @@ package simpati
 import (
 	"fmt"
 
-	"boilerplate/helper/wacipher"
-	"boilerplate/model"
+	"iteung/helper/wacipher"
+	"iteung/model"
 
 	"github.com/whatsauth/whatsauth"
 )

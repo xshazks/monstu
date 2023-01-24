@@ -3,9 +3,9 @@ package simpati
 import (
 	"fmt"
 
-	"boilerplate/helper"
-	"boilerplate/helper/wacipher"
-	"boilerplate/model"
+	"iteung/helper"
+	"iteung/helper/wacipher"
+	"iteung/model"
 )
 
 func GetLoginInfofromPhoneNumber(phonenumber string) (response model.Simpati) {

@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"strconv"
 
-	"boilerplate/config"
-	"boilerplate/model"
-	"boilerplate/module/simpati"
+	"iteung/config"
+	"iteung/model"
+	"iteung/module/simpati"
 
 	"github.com/gin-gonic/gin"
 	"github.com/whatsauth/whatsauth"
