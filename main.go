@@ -1,8 +1,8 @@
 package main
 
 import (
-	"boilerplate/config"
-	"boilerplate/url"
+	"iteung/config"
+	"iteung/url"
 
 	"github.com/gin-gonic/gin"
 	"github.com/whatsauth/whatsauth"

@@ -6,8 +6,9 @@ import (
 	"strconv"
 
 	"iteung/config"
-	"iteung/model"
-	"iteung/module/simpati"
+
+	"github.com/aiteung/atdb"
+	"github.com/aiteung/simpati"
 
 	"github.com/gin-gonic/gin"
 	"github.com/whatsauth/whatsauth"
@@ -18,9 +19,9 @@ func WsWhatsAuthQR(c *gin.Context) {
 }
 
 func PostWhatsAuthMessage(c *gin.Context) {
-	var ws model.WhatsauthStatus
+	var ws whatsauth.WhatsauthStatus
 	if c.Request.Host == config.Internalhost {
-		var m model.WhatsauthMessage
+		var m whatsauth.WhatsauthMessage
 		c.BindJSON(&m)
 		msg := m.Message
 		b, err := json.Marshal(msg)
@@ -38,9 +39,10 @@ func PostWhatsAuthMessage(c *gin.Context) {
 
 func PostWhatsAuthRequest(c *gin.Context) {
 	if c.Request.Host == config.Internalhost {
-		var req model.WhatsauthRequest
+		var req whatsauth.WhatsauthRequest
 		c.BindJSON(&req)
-		ntfbtn := simpati.RunModule(req)
+		mariaconn := atdb.MariaConnect(config.Ulbimariaconn)
+		ntfbtn := simpati.RunModule(req, config.Usertables[:], mariaconn)
 		c.JSON(200, ntfbtn)
 	}
 }
