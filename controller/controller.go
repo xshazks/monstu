@@ -7,7 +7,6 @@ import (
 
 	"iteung/config"
 
-	"github.com/aiteung/atdb"
 	"github.com/aiteung/simpati"
 
 	"github.com/gin-gonic/gin"
@@ -41,8 +40,7 @@ func PostWhatsAuthRequest(c *gin.Context) {
 	if c.Request.Host == config.Internalhost {
 		var req whatsauth.WhatsauthRequest
 		c.BindJSON(&req)
-		mariaconn := atdb.MariaConnect(config.Ulbimariaconn)
-		ntfbtn := simpati.RunModule(req, config.Usertables[:], mariaconn)
+		ntfbtn := simpati.RunModule(req, config.Usertables[:], config.Ulbimariaconn)
 		c.JSON(200, ntfbtn)
 	}
 }
