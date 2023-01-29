@@ -12,12 +12,12 @@ import (
 
 	"github.com/aiteung/musik"
 	"github.com/gofiber/fiber/v2/middleware/cors"
-	"pkgname/config"
+	"iteung/config"
 
 	"github.com/whatsauth/whatsauth"
 
 	"github.com/gofiber/fiber/v2"
-	"pkgname/url"
+	"iteung/url"
 )
 
 func main() {
@@ -39,7 +39,7 @@ package url
 import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/websocket/v2"
-	"pkgname/controller"
+	"iteung/controller"
 )
 
 func Web(page *fiber.App) {
@@ -60,7 +60,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/websocket/v2"
 	"github.com/whatsauth/whatsauth"
-	"pkgname/config"
+	"iteung/config"
 )
 
 func WsWhatsAuthQR(c *websocket.Conn) {
