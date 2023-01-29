@@ -1,46 +1,29 @@
 package controller
 
 import (
-	"encoding/json"
-	"fmt"
-	"strconv"
-
-	"iteung/config"
-
-	"github.com/aiteung/simpati"
-
-	"github.com/gin-gonic/gin"
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/websocket/v2"
 	"github.com/whatsauth/whatsauth"
+	"gitlab.com/informatics-research-center/auth-service/config"
 )
 
-func WsWhatsAuthQR(c *gin.Context) {
-	whatsauth.ServeWs(c.Writer, c.Request)
+func WsWhatsAuthQR(c *websocket.Conn) {
+	whatsauth.RunSocket(c, config.PublicKey, config.Usertables[:], config.Ulbimariaconn)
 }
 
-func PostWhatsAuthMessage(c *gin.Context) {
-	var ws whatsauth.WhatsauthStatus
-	if c.Request.Host == config.Internalhost {
-		var m whatsauth.WhatsauthMessage
-		c.BindJSON(&m)
-		msg := m.Message
-		b, err := json.Marshal(msg)
-		if err != nil {
-			fmt.Printf("Error: %s", err)
-			return
-		}
-		ws.Status = strconv.FormatBool(whatsauth.SendMessageTo(m.Id, string(b)))
-	} else {
-		ws.Status = c.Request.Host
-	}
-	c.JSON(200, ws)
-
-}
-
-func PostWhatsAuthRequest(c *gin.Context) {
-	if c.Request.Host == config.Internalhost {
+func PostWhatsAuthRequest(c *fiber.Ctx) error {
+	if string(c.Request().Host()) == config.Internalhost {
 		var req whatsauth.WhatsauthRequest
-		c.BindJSON(&req)
-		ntfbtn := simpati.RunModule(req, config.Usertables[:], config.Ulbimariaconn)
-		c.JSON(200, ntfbtn)
+		err := c.BodyParser(&req)
+		if err != nil {
+			return err
+		}
+		ntfbtn := whatsauth.RunModule(req, config.PrivateKey, config.Usertables[:], config.Ulbimariaconn)
+		return c.JSON(ntfbtn)
+	} else {
+		var ws whatsauth.WhatsauthStatus
+		ws.Status = string(c.Request().Host())
+		return c.JSON(ws)
 	}
+
 }

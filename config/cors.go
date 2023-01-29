@@ -2,10 +2,9 @@ package config
 
 import (
 	"os"
-	"time"
+	"strings"
 
-	"github.com/gin-contrib/cors"
-	"github.com/gin-gonic/gin"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 )
 
 var origins = []string{
@@ -15,21 +14,15 @@ var origins = []string{
 	"https://home.ulbi.ac.id",
 	"https://alpha.ulbi.ac.id",
 	"https://dias.ulbi.ac.id",
+	"https://iteung.ulbi.ac.id",
+	"https://whatsauth.github.io",
 }
 
 var Internalhost string = os.Getenv("INTERNALHOST") + ":" + os.Getenv("PORT")
 
-func Cors() gin.HandlerFunc {
-	return cors.New(cors.Config{
-		AllowOrigins:     origins,
-		AllowMethods:     []string{"PUT", "PATCH", "POST", "GET", "DELETE"},
-		AllowHeaders:     []string{"Origin"},
-		ExposeHeaders:    []string{"Content-Length"},
-		AllowCredentials: true,
-		AllowOriginFunc: func(origin string) bool {
-			return origin == "https://auth.ulbi.ac.id"
-		},
-		MaxAge: 12 * time.Hour,
-	})
-
+var Cors = cors.Config{
+	AllowOrigins:     strings.Join(origins[:], ","),
+	AllowHeaders:     "Origin",
+	ExposeHeaders:    "Content-Length",
+	AllowCredentials: true,
 }

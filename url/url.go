@@ -1,14 +1,13 @@
 package url
 
 import (
-	"iteung/controller"
-
-	"github.com/gin-gonic/gin"
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/websocket/v2"
+	"gitlab.com/informatics-research-center/auth-service/controller"
 )
 
-func Web(page *gin.Engine) {
-	page.POST("/api/whatsauth/message", controller.PostWhatsAuthMessage)
-	page.POST("/api/whatsauth/request", controller.PostWhatsAuthRequest)
-	page.GET("/ws/whatsauth/qr", controller.WsWhatsAuthQR)
+func Web(page *fiber.App) {
+	page.Post("/api/whatsauth/request", controller.PostWhatsAuthRequest)  //API from user whatsapp message from iteung gowa
+	page.Get("/ws/whatsauth/qr", websocket.New(controller.WsWhatsAuthQR)) //websocket whatsauth
 
 }

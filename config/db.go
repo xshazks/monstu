@@ -13,28 +13,28 @@ var MongoString string = os.Getenv("MONGOSTRING")
 
 var MariaStringAkademik string = os.Getenv("MARIASTRINGAKADEMIK")
 
-var Ulbimariainfo = atdb.DBInfo{
+var DBUlbimariainfo = atdb.DBInfo{
 	DBString: MariaStringAkademik,
-	DBName:   "DB_ULBI",
+	DBName:   "db_ulbi",
 }
 
-var Ulbimariaconn = atdb.MariaConnect(Ulbimariainfo)
+var Ulbimariaconn = atdb.MariaConnect(DBUlbimariainfo)
 
 var Usertables = [4]whatsauth.LoginInfo{mhs, dosen, user, user1}
 
 var mhs = whatsauth.LoginInfo{
-	Userid:   "user_id",
+	Userid:   "MhswID",
 	Password: "Password",
-	Phone:    "Phone",
+	Phone:    "Telepon",
 	Username: "Login",
 	Uuid:     "simak_mst_mahasiswa",
 	Login:    "2md5",
 }
 
 var dosen = whatsauth.LoginInfo{
-	Userid:   "user_id",
+	Userid:   "NIDN",
 	Password: "Password",
-	Phone:    "Phone",
+	Phone:    "Handphone",
 	Username: "Login",
 	Uuid:     "simak_mst_dosen",
 	Login:    "2md5",
@@ -43,7 +43,7 @@ var dosen = whatsauth.LoginInfo{
 var user = whatsauth.LoginInfo{
 	Userid:   "user_id",
 	Password: "user_password",
-	Phone:    "Phone",
+	Phone:    "phone",
 	Username: "user_name",
 	Uuid:     "simak_besan_users",
 	Login:    "2md5",
@@ -52,7 +52,7 @@ var user = whatsauth.LoginInfo{
 var user1 = whatsauth.LoginInfo{
 	Userid:   "user_id",
 	Password: "user_password",
-	Phone:    "Phone",
+	Phone:    "user_phone",
 	Username: "user_name",
 	Uuid:     "besan_users",
 	Login:    "2md5",
