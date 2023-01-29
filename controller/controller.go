@@ -1,10 +1,11 @@
 package controller
 
 import (
+	"iteung/config"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/websocket/v2"
 	"github.com/whatsauth/whatsauth"
-	"gitlab.com/informatics-research-center/auth-service/config"
 )
 
 func WsWhatsAuthQR(c *websocket.Conn) {

@@ -1,9 +1,10 @@
 package url
 
 import (
+	"iteung/controller"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/websocket/v2"
-	"gitlab.com/informatics-research-center/auth-service/controller"
 )
 
 func Web(page *fiber.App) {
