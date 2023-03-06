@@ -3,14 +3,14 @@ package main
 import (
 	"log"
 
-	"github.com/gocroot/gocroot/config"
+	"iteung/config"
 
 	"github.com/aiteung/musik"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 
 	"github.com/whatsauth/whatsauth"
 
-	"github.com/gocroot/gocroot/url"
+	"iteung/url"
 
 	"github.com/gofiber/fiber/v2"
 )
