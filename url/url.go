@@ -1,7 +1,7 @@
 package url
 
 import (
-	"github.com/gocroot/gocroot/controller"
+	"iteung/controller"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/websocket/v2"

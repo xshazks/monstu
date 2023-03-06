@@ -1,6 +1,10 @@
 # boilerplate
-boilerplate for using aiteung package
+boilerplate for using aiteung package. Please init your apps, and replace package import with the name iteung/... in the main.go, controller.go dan url.go
 
+```sh
+go mod init yourpackageurl
+go mod tidy
+```
 
 ## main
 main.go file
