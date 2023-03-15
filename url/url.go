@@ -13,5 +13,9 @@ func Web(page *fiber.App) {
 
 	page.Get("/", controller.Sink)
 	page.Post("/", controller.Sink)
+	page.Put("/", controller.Sink)
+	page.Patch("/", controller.Sink)
+	page.Delete("/", controller.Sink)
+	page.Options("/", controller.Sink)
 
 }
