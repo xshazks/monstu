@@ -21,7 +21,7 @@ import (
 func HandlingMessage(Info *types.MessageInfo, Message *waProto.Message) {
 	go config.Client.MarkRead([]string{Info.ID}, time.Now(), Info.Chat, Info.Sender)
 	if !Info.IsFromMe {
-		atmessage.SendMessage("hai ", Info.Sender, config.Client)
+		atmessage.SendMessage("hai", Info.Sender, config.Client)
 	}
 }
 
