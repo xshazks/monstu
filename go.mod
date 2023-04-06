@@ -4,17 +4,19 @@ go 1.20
 
 require (
 	github.com/aiteung/atdb v0.0.10
+	github.com/aiteung/atmessage v0.0.17
 	github.com/aiteung/musik v0.0.5
 	github.com/gofiber/fiber/v2 v2.43.0
 	github.com/gofiber/websocket/v2 v2.1.5
+	github.com/mattn/go-sqlite3 v1.14.16
 	github.com/whatsauth/whatsauth v0.1.92
+	go.mau.fi/whatsmeow v0.0.0-20230406121024-1ee2ff1d0f52
 )
 
 require (
 	aidanwoods.dev/go-paseto v1.3.0 // indirect
 	filippo.io/edwards25519 v1.0.0 // indirect
 	github.com/aiteung/atapi v0.0.13 // indirect
-	github.com/aiteung/atmessage v0.0.17 // indirect
 	github.com/aiteung/atmodel v0.0.3 // indirect
 	github.com/andybalholm/brotli v1.0.5 // indirect
 	github.com/fasthttp/websocket v1.5.2 // indirect
@@ -46,7 +48,6 @@ require (
 	github.com/xdg-go/stringprep v1.0.4 // indirect
 	github.com/youmark/pkcs8 v0.0.0-20201027041543-1326539a0a0a // indirect
 	go.mau.fi/libsignal v0.1.0 // indirect
-	go.mau.fi/whatsmeow v0.0.0-20230406121024-1ee2ff1d0f52 // indirect
 	go.mongodb.org/mongo-driver v1.11.4 // indirect
 	golang.org/x/crypto v0.7.0 // indirect
 	golang.org/x/sync v0.1.0 // indirect

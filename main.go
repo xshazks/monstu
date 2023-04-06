@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"iteung/config"
+	"iteung/controller"
 
 	"github.com/aiteung/musik"
 	"github.com/gofiber/fiber/v2/middleware/cors"
@@ -17,6 +18,7 @@ import (
 
 func main() {
 	go whatsauth.RunHub()
+	controller.RunWA()
 	site := fiber.New(config.Iteung)
 	site.Use(cors.New(config.Cors))
 	url.Web(site)
