@@ -18,7 +18,7 @@ import (
 
 func main() {
 	go whatsauth.RunHub()
-	controller.RunWA()
+	config.Client = controller.RunWA()
 	site := fiber.New(config.Iteung)
 	site.Use(cors.New(config.Cors))
 	url.Web(site)

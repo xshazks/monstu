@@ -25,16 +25,21 @@ func HandlingMessage(Info *types.MessageInfo, Message *waProto.Message) {
 	}
 }
 
+func HandlingStatus(Info *events.Receipt) {
+	fmt.Println("Receipt", Info)
+	fmt.Println(Info.MessageIDs)
+}
+
 func WAEventHandler(evt interface{}) {
 	switch v := evt.(type) {
 	case *events.Message:
 		go HandlingMessage(&v.Info, v.Message)
 	case *events.Receipt:
-		fmt.Println(v)
+		go HandlingStatus(v)
 	}
 }
 
-func RunWA() {
+func RunWA() (waclient *whatsmeow.Client) {
 	fmt.Println("Starting Whatsapp")
 	dbLog := waLog.Stdout("Database", "ERROR", true)
 	musik.CreateFolderifNotExist("./session/")
@@ -47,18 +52,12 @@ func RunWA() {
 		panic(err)
 	}
 	clientLog := waLog.Stdout("Client", "ERROR", true)
-	config.Client = whatsmeow.NewClient(deviceStore, clientLog)
-	config.Client.AddEventHandler(WAEventHandler)
-	PairWA(config.Client)
-
-}
-
-func PairWA(wc *whatsmeow.Client) {
-	var err error
-	if wc.Store.ID == nil {
+	waclient = whatsmeow.NewClient(deviceStore, clientLog)
+	waclient.AddEventHandler(WAEventHandler)
+	if waclient.Store.ID == nil {
 		// No ID stored, new login
-		qrChan, _ := wc.GetQRChannel(context.Background())
-		err = wc.Connect()
+		qrChan, _ := waclient.GetQRChannel(context.Background())
+		err = waclient.Connect()
 		if err != nil {
 			panic(err)
 		}
@@ -71,10 +70,12 @@ func PairWA(wc *whatsmeow.Client) {
 		}
 	} else {
 		// Already logged in, just connect
-		err = wc.Connect()
+		err = waclient.Connect()
 		if err != nil {
 			panic(err)
 		}
 		fmt.Println("Client Connected")
 	}
+	return
+
 }
