@@ -7,7 +7,6 @@ import (
 	"iteung/config"
 
 	"github.com/aiteung/atmessage"
-	_ "github.com/mattn/go-sqlite3"
 	waProto "go.mau.fi/whatsmeow/binary/proto"
 	"go.mau.fi/whatsmeow/types"
 	"go.mau.fi/whatsmeow/types/events"
@@ -19,7 +18,25 @@ func HandlingMessage(Info *types.MessageInfo, Message *waProto.Message) {
 	if !Info.IsFromMe {
 		duration := time.Duration(10) * time.Second
 		time.Sleep(duration)
-		atmessage.SendMessage(Message.GetConversation(), Info.Chat, config.Client)
+		//sendButtonMessage(Info.Chat)
+		//atmessage.SendMessage(Message.GetConversation(), Info.Chat, config.Client)
+		var btnmsg = atmessage.WaButton{
+			ButtonId:    "idbutton",
+			DisplayText: "ok",
+		}
+		var btnmsg2 = atmessage.WaButton{
+			ButtonId:    "idbutton2",
+			DisplayText: "no",
+		}
+		var btn = atmessage.ButtonsMessage{
+			Message: atmessage.WaButtonsMessage{
+				HeaderText:  "judul",
+				ContentText: "isi",
+				FooterText:  "kaki",
+			},
+			Buttons: []atmessage.WaButton{btnmsg, btnmsg2},
+		}
+		atmessage.SendButtonMessage(btn, Info.Chat, config.Client)
 	}
 }
 
