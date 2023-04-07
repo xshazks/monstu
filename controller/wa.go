@@ -20,12 +20,15 @@ import (
 
 func HandlingMessage(Info *types.MessageInfo, Message *waProto.Message) {
 	go config.Client.MarkRead([]string{Info.ID}, time.Now(), Info.Chat, Info.Sender)
+	go config.Client.SendChatPresence(Info.Chat, "composing", "")
 	if !Info.IsFromMe {
+		duration := time.Duration(10) * time.Second
+		time.Sleep(duration)
 		atmessage.SendMessage(Message.GetConversation(), Info.Chat, config.Client)
 	}
 }
 
-func HandlingStatus(Info *events.Receipt) {
+func HandlingReceipt(Info *events.Receipt) {
 	fmt.Println("Receipt", Info)
 	fmt.Println(Info.MessageIDs)
 }
@@ -35,7 +38,7 @@ func WAEventHandler(evt interface{}) {
 	case *events.Message:
 		go HandlingMessage(&v.Info, v.Message)
 	case *events.Receipt:
-		go HandlingStatus(v)
+		go HandlingReceipt(v)
 	}
 }
 
