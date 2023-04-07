@@ -31,6 +31,7 @@ func HandlingMessage(Info *types.MessageInfo, Message *waProto.Message) {
 func HandlingReceipt(Info *events.Receipt) {
 	fmt.Println("Receipt", Info)
 	fmt.Println(Info.MessageIDs)
+	fmt.Println(Info.Type)
 }
 
 func WAEventHandler(evt interface{}) {
@@ -42,7 +43,7 @@ func WAEventHandler(evt interface{}) {
 	}
 }
 
-func RunWA() (waclient *whatsmeow.Client) {
+func RunWA(handler whatsmeow.EventHandler) (waclient *whatsmeow.Client) {
 	fmt.Println("Starting Whatsapp")
 	dbLog := waLog.Stdout("Database", "ERROR", true)
 	musik.CreateFolderifNotExist("./session/")
@@ -56,7 +57,7 @@ func RunWA() (waclient *whatsmeow.Client) {
 	}
 	clientLog := waLog.Stdout("Client", "ERROR", true)
 	waclient = whatsmeow.NewClient(deviceStore, clientLog)
-	waclient.AddEventHandler(WAEventHandler)
+	waclient.AddEventHandler(handler)
 	if waclient.Store.ID == nil {
 		// No ID stored, new login
 		qrChan, _ := waclient.GetQRChannel(context.Background())
