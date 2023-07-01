@@ -40,7 +40,7 @@ func GetDataDafdir(c *fiber.Ctx) error {
 	return c.JSON(getket)
 }
 func GetDataNilai(c *fiber.Ctx) error {
-	getlai := gosaw.GetDataNilai("Matematika, Biologi")
+	getlai := gosaw.GetDataNilai("Matematika")
 	return c.JSON(getlai)
 }
 
