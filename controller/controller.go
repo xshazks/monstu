@@ -39,3 +39,17 @@ func GetDataDafdir(c *fiber.Ctx) error {
 	getket := gosaw.GetDataDafdir("Masuk")
 	return c.JSON(getket)
 }
+func GetDataNilai(c *fiber.Ctx) error {
+	getlai := gosaw.GetDataNilai("Matematika, Biologi")
+	return c.JSON(getlai)
+}
+
+func GetDafpel(c *fiber.Ctx) error {
+	getpel := gosaw.GetDataDafpel("Terlambat")
+	return c.JSON(getpel)
+}
+
+func GetDataPembayaran(c *fiber.Ctx) error {
+	getyar := gosaw.GetDataPembayaran("Terbayar")
+	return c.JSON(getyar)
+}
