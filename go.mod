@@ -8,6 +8,7 @@ require (
 	github.com/gofiber/fiber/v2 v2.47.0
 	github.com/gofiber/websocket/v2 v2.2.1
 	github.com/whatsauth/whatsauth v0.2.5
+	github.com/xshazks/gosaw v0.0.22
 )
 
 require (

@@ -6,6 +6,8 @@ import (
 	"github.com/gofiber/websocket/v2"
 	"github.com/whatsauth/whatsauth"
 	"github.com/xshazks/monstu/config"
+	"github.com/xshazks/gosaw"
+	
 )
 
 func WsWhatsAuthQR(c *websocket.Conn) {
@@ -32,4 +34,13 @@ func PostWhatsAuthRequest(c *fiber.Ctx) error {
 func GetHome(c *fiber.Ctx) error {
 	getip := musik.GetIPaddress()
 	return c.JSON(getip)
+}
+
+func InsertDafdir(c *fiber.Ctx) error {
+	dafdir := new(gosaw.Dafdir)
+	ps := gosaw.InsertDafdir(config.MongoConn,
+		dafdir.Keterangan,
+		dafdir.Kehadiran,
+	)
+	return c.JSON(ps)
 }
